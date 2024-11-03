@@ -1,7 +1,7 @@
-﻿using Common.ConfigurationManager;
-
-namespace DatabaseCoreKit.DatabaseConnection.ConfigurationSettings
+﻿namespace DatabaseCoreKit.DatabaseConnection.ConfigurationSettings
 {
+    using Common.ConfigurationManager;
+
     internal class DatabaseSettings : IConfigurationSettings
     {
         public int MaxPoolConnections { get; set; }

@@ -1,17 +1,17 @@
 ﻿namespace UnitTesting.Database.DatabaseConnectionTest
 {
-    using DatabaseCoreKit.DatabaseConnectionsThreadPool;
+    using DatabaseCoreKit.DatabaseConnectionPool;
     using DatabaseCoreKit.DatabaseConnectionValidator;
 
     [TestClass]
     public class DatabaseConnectionValidatorTests
     {
         private readonly DatabaseConnectionValidator _databaseConnectionValidator;
-        private readonly DatabaseConnectionsThreadPool _databaseConnectionsThreadPool;
+        private readonly DatabaseConnectionPool _databaseConnectionsThreadPool;
         public DatabaseConnectionValidatorTests()
         {
             this._databaseConnectionValidator = new DatabaseConnectionValidator();
-            this._databaseConnectionsThreadPool = DatabaseConnectionsThreadPool.GetDatabaseConnectionInstance();
+            this._databaseConnectionsThreadPool = DatabaseConnectionPool.GetDatabaseConnectionInstance();
         }
 
         [TestMethod]

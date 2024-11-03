@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileProviders;
-
-namespace Common.ConfigurationManager
+﻿namespace Common.ConfigurationManager
 {
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.FileProviders;
+
     public class ConfigurationManager
     {
         private const string m_strFileName = "appsettings.json";

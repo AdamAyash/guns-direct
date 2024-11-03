@@ -1,13 +1,13 @@
-﻿namespace DatabaseCoreKit.DatabaseConnectionsThreadPool
+﻿namespace DatabaseCoreKit.DatabaseConnectionPool
 {
     using Common.ConfigurationManager;
     using DatabaseCoreKit.DatabaseConnection.ConfigurationSettings;
     using DatabaseCoreKit.DatabaseConnectionValidator;
     using Microsoft.Data.SqlClient;
 
-    public sealed class DatabaseConnectionsThreadPool
+    public sealed class DatabaseConnectionPool
     {
-        private static DatabaseConnectionsThreadPool? _databaseConnectionInstance = null;
+        private static DatabaseConnectionPool? _databaseConnectionInstance = null;
 
         private int? _maxPoolSize = 10; //Max connections by default
         private string? _connectionString;
@@ -21,7 +21,7 @@
         public int AvailableConnectionsCount => _databaseConnectionsPool.Count;
         public int CurrentlyUsedConnections => this._databaseCurrentlyUsedConnections.Count;
 
-        private DatabaseConnectionsThreadPool()
+        private DatabaseConnectionPool()
         {
             this._databaseConnectionsPool = new List<SqlConnection>();
             this._databaseCurrentlyUsedConnections = new List<SqlConnection>();
@@ -29,7 +29,7 @@
             this._configurationManager  = new ConfigurationManager();
 
             RetrieveDatabseConfiguration();
-            InitializeThreadPool();
+            InitializeConnectionPool();
         }
         private void RetrieveDatabseConfiguration()
         {
@@ -39,7 +39,7 @@
             this._maxPoolSize = databaseSettings.MaxPoolConnections;
         }
 
-        private void InitializeThreadPool()
+        private void InitializeConnectionPool()
         {
             for (short index = 0;  index < _maxPoolSize; ++index)
             {
@@ -87,10 +87,10 @@
             return isRemoved;
         }
 
-        public static DatabaseConnectionsThreadPool GetDatabaseConnectionInstance()
+        public static DatabaseConnectionPool GetDatabaseConnectionInstance()
         {
             if (_databaseConnectionInstance == null)
-                _databaseConnectionInstance = new DatabaseConnectionsThreadPool();
+                _databaseConnectionInstance = new DatabaseConnectionPool();
 
             return _databaseConnectionInstance;
         }
