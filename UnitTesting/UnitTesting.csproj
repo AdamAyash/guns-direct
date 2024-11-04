@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DatabaseCoreKit\DatabaseCoreKit.csproj" />
+    <ProjectReference Include="..\WebAPIGateway\WebAPIGateway.csproj" />
   </ItemGroup>
 
   <ItemGroup>
