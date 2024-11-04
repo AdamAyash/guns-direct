@@ -1,6 +1,6 @@
 ﻿namespace UnitTesting.Database.ConnectionPool
 {
-    using DatabaseCoreKit.DatabaseConnectionPool;
+    using DatabaseCoreKit.Database.DatabaseConnection;
 
     [TestClass]
     public class DatabaseConnectionPoolTests
@@ -14,7 +14,7 @@
         }
 
         [TestMethod]
-        public void DatabaseConnectionsThreadPoolInstance()
+        public void DatabaseConnectionPoolInstance()
         {
             Assert.IsNotNull(this._databaseConnectionPool);
         }

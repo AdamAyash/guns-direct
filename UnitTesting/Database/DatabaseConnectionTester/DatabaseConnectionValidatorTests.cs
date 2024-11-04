@@ -1,7 +1,7 @@
 ﻿namespace UnitTesting.Database.DatabaseConnectionTest
 {
-    using DatabaseCoreKit.DatabaseConnectionPool;
-    using DatabaseCoreKit.DatabaseConnectionValidator;
+    using DatabaseCoreKit.Database;
+    using DatabaseCoreKit.Database.DatabaseConnection;
 
     [TestClass]
     public class DatabaseConnectionValidatorTests
