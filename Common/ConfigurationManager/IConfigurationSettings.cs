@@ -1,4 +1,4 @@
-﻿namespace Common.ConfigurationManager
+﻿namespace Common
 {
     public interface IConfigurationSettings
     {

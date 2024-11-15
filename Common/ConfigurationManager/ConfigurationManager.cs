@@ -1,16 +1,17 @@
-﻿namespace Common.ConfigurationManager
+﻿namespace Common
 {
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.FileProviders;
+    using Serilog;
 
-    public class ConfigurationManager
+    public sealed class ConfigurationManager
     {
         private const string m_strFileName = "appsettings.json";
 
-        private IConfigurationRoot m_oConfigurationRoot;
-        private IFileProvider m_oConfigurationFileProvider;
+        private IConfigurationRoot? m_oConfigurationRoot;
+        private IFileProvider? m_oConfigurationFileProvider;
 
-        private string m_strFilePath;
+        private string? m_strFilePath;
 
         private readonly bool m_bIsConfigurationOptional = false;
         private readonly bool m_bIsReloadOnChange = false;
@@ -31,7 +32,7 @@
         public ConfigurationSettings? GetConfiguration<ConfigurationSettings>(string strConfigurationSectionName)
             where ConfigurationSettings : IConfigurationSettings
         {
-            return m_oConfigurationRoot.GetRequiredSection(strConfigurationSectionName).Get<ConfigurationSettings>();
+            return m_oConfigurationRoot!.GetRequiredSection(strConfigurationSectionName).Get<ConfigurationSettings>();
         }
 
         public string? GetConnectionString(string connectionStringName)
