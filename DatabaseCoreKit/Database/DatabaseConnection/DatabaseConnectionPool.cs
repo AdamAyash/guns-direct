@@ -1,14 +1,16 @@
-﻿namespace DatabaseCoreKit.Database.DatabaseConnection
+﻿namespace DatabaseCoreKit
 {
-    using Common.ConfigurationManager;
+    using Common;
     using Microsoft.Data.SqlClient;
 
-    public sealed class DatabaseConnectionPool
+    public sealed class DatabaseConnectionPool : IDatabaseConnectionPool
     {
         private static DatabaseConnectionPool? _databaseConnectionInstance = null;
 
         private int? _maxPoolSize = 10; //Max connections by default
         private string? _connectionString;
+
+        private Logger _logger = Logger.GetLoggerInstance();
 
         private DatabaseConnectionValidator _databaseConnectionValidator;
         private ConfigurationManager _configurationManager;
@@ -28,13 +30,21 @@
 
             RetrieveDatabseConfiguration();
             InitializeConnectionPool();
+
+
         }
+
+        ~DatabaseConnectionPool()
+        {
+
+        }
+
         private void RetrieveDatabseConfiguration()
         {
             DatabaseSettings? databaseSettings = _configurationManager.GetConfiguration<DatabaseSettings>("DatabaseSettings");
 
             _connectionString = _configurationManager.GetConnectionString("GunsDirectDatabase");
-            _maxPoolSize = databaseSettings.MaxPoolConnections;
+            _maxPoolSize = databaseSettings!.MaxPoolConnections;
         }
 
         private void InitializeConnectionPool()
@@ -48,6 +58,8 @@
 
                 _databaseConnectionsPool.Add(databaseConnection);
             }
+
+            _logger.LogInformation(Messages.COONECTION_POOL_INITIAZLIZED_MESSAGE);
         }
         private SqlConnection? CreateNewConnection()
         {
@@ -71,7 +83,7 @@
 
             return databaseConnection;
         }
-        public bool ReleaseUsedConnection(SqlConnection databaseConnection)
+        public bool ReleaseConnection(SqlConnection databaseConnection)
         {
             if (!_databaseConnectionValidator.IsConnectionOpen(databaseConnection))
             {

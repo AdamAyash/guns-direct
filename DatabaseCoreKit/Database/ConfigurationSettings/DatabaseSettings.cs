@@ -1,9 +1,10 @@
-﻿namespace DatabaseCoreKit.Database
+﻿namespace DatabaseCoreKit
 {
-    using Common.ConfigurationManager;
+    using Common;
 
     internal class DatabaseSettings : IConfigurationSettings
     {
         public int MaxPoolConnections { get; set; }
+        public string? DatabaseXMLSchemePath { get; set; }
     }
 }
