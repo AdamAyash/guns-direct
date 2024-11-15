@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+
+<tables>
+	<table name="PRODUCTS">
+		<column name="ID" dataType="int" isPrimaryKey="true"></column>
+		<column name="NAME" dataType="varchar" size="32"></column>
+	</table>
+</tables>

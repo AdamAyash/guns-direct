@@ -1,8 +1,14 @@
+using DatabaseCoreKit;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
+
+DatabaseXMLSchemeParser parser = new DatabaseXMLSchemeParser();
+parser.Process();
 
 var app = builder.Build();
 
