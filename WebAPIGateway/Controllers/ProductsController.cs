@@ -18,11 +18,5 @@
         {
             return "Hello, world!";
         }
-
-        [HttpPost]
-        public ActionResult<string> UpdateProduct([FromBody] string name)
-        {
-            return "Success";
-        }
     }
 }
