@@ -151,7 +151,7 @@
             if (tableColumn.Attributes[DATA_TYPE_ATTRIBUTE] == null || tableColumn.Attributes[DATA_TYPE_ATTRIBUTE]?.Value == null)
             {
                 isColumnDataValid = false;
-                validationMessage = Messages.TABLE_COLUMN_SCHEME_HAS_NO_NAME_ATTRIBUTES;
+                validationMessage = Messages.TABLE_COLUMN_SCHEME_HAS_NO_DATA_ATTRIBUTES;
             }
 
             string dataType = tableColumn.Attributes[DATA_TYPE_ATTRIBUTE]!.Value;

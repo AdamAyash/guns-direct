@@ -43,6 +43,16 @@
             Log.Logger.Error( message);
         }
 
+        public void LogError(string message, params object?[]? propertyValue)
+        {
+            Log.Logger.Error(message, propertyValue);
+        }
+
+        public void LogError(Exception? exception, string messageTemplate)
+        {
+            Log.Logger.Error(exception, messageTemplate);
+        }
+
         public void LogFatal(string message)
         {
             Log.Logger.Fatal(message);
@@ -51,11 +61,6 @@
         public void LogFatal(Exception? exception, string messageTemplate)
         {
             Log.Logger.Fatal(exception, messageTemplate);
-        }
-
-        public void LogError(Exception? exception, string messageTemplate)
-        {
-            Log.Logger.Error(exception, messageTemplate);
         }
     }
 }

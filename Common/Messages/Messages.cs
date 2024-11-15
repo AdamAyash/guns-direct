@@ -10,5 +10,6 @@
         public const string TABLE_SCHEME_HAS_NO_NAME_ATTRIBUTE = "Table scheme has no name attribute.";
         public const string TABLE_COLUMN_SCHEME_HAS_NO_NAME_ATTRIBUTES = "Table column scheme has no name attribute.";
         public const string APPLICATION_SHUT_DOWN_WITH_ERROR_MESSAGE = "The application has encountered an error and has been shutdown.";
+        public const string TABLE_COLUMN_SCHEME_HAS_NO_DATA_ATTRIBUTES = "Table column scheme has no data type attribute.";
     }
 }
