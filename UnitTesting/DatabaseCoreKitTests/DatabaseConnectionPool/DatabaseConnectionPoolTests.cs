@@ -1,7 +1,7 @@
-﻿namespace UnitTesting.Database.ConnectionPool
-{
-    using DatabaseCoreKit.Database.DatabaseConnection;
+﻿using DatabaseCoreKit;
 
+namespace UnitTesting.Database.ConnectionPool
+{
     [TestClass]
     public class DatabaseConnectionPoolTests
     {
@@ -62,7 +62,7 @@
             if (connection == null)
                 return;
 
-            bool isReleased = _databaseConnectionPool.ReleaseUsedConnection(connection);
+            bool isReleased = _databaseConnectionPool.ReleaseConnection(connection);
 
             Assert.IsTrue(isReleased);
         }
