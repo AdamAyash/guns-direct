@@ -1,6 +1,6 @@
 ﻿namespace DatabaseCoreKit
 { 
-    public class TableBindingsDataMap
+    internal class TableBindingsDataMap
     {
         private static TableBindingsDataMap? _TableBindingsDataMapInstance = null;
         private Dictionary<string, TableBindingsData> _TableBindingsDataMap;

@@ -15,7 +15,6 @@
             _logSettings = GetConfiguration();
 
             Log.Logger = new LoggerConfiguration()
-            //.WriteTo.Console()
             .WriteTo.Seq(_logSettings.SeqServerUrl)
             .CreateLogger();
         }

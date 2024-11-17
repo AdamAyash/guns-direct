@@ -1,6 +1,6 @@
 ﻿namespace DatabaseCoreKit
 {
-    public class DatabaseColumnInfo
+    internal class DatabaseColumnInfo
     {
         public string Name { get; set; }
         public string DataType { get; set; }

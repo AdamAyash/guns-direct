@@ -2,7 +2,7 @@
 {
     using System.Text;
 
-    public class TableBindingsData
+    internal class TableBindingsData
     {
         private List<DatabaseColumnInfo> _tableColumns;
         public TableBindingsData()

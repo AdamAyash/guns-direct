@@ -1,6 +1,6 @@
 ﻿namespace DatabaseCoreKit
 {
-    public interface DatabaseSchemeParser
+    public interface IDatabaseSchemeParser
     {
         public bool Process();
     }
