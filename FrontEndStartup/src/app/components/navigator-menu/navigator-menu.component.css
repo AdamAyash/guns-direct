@@ -1,3 +1,13 @@
+.navbar{
+    background-color: #ECECEC !important;
+    height: 50px;
+}
+
+.navbar-middle{
+    height: 100px;
+    background-color: #FAFAFA;
+}
+
 .navbar-top{
     height: 30px;
     background-color: #EAD9D8;
@@ -14,7 +24,7 @@
 }
 
 .nav-item{
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .nav-item:hover{

@@ -1,5 +1,6 @@
 ﻿namespace DatabaseCoreKit
 {
+    using Common;
     using Microsoft.Data.SqlClient;
 
     public class BaseTable<RecordType, IdentityKey>
@@ -7,6 +8,8 @@
     {
         private readonly DatabaseConnectionPool _databaseConnectionPool;
         private readonly TableBindingsData _SQLTableBindingsData;
+
+        private Logger _logger = Logger.GetLoggerInstance();
         public string TableName { get; private set; }
 
         public BaseTable(string tableName)
@@ -39,6 +42,8 @@
             }
             catch (Exception exception)
             {
+                _logger.LogError(exception.Message);
+                return false;
             }
 
             var domainObjectMapper = new SQLToDomainObjectMapper<RecordType>(_SQLTableBindingsData);

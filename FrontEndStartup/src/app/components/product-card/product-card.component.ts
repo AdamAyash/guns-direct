@@ -9,5 +9,5 @@ import { BaseComponent } from '../../base/ui/components/base-component';
   styleUrl: './product-card.component.css'
 })
 export class ProductCardComponent {
-
+  
 }

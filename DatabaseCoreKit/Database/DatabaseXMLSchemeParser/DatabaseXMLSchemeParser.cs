@@ -140,7 +140,6 @@
                 validationMessage = Messages.TABLE_COLUMN_SCHEME_HAS_NO_NAME_ATTRIBUTES;
             }
 
-
             //Да проверяваме дали вечя няма таква колона
             if (tableColumn.Attributes[NAME_ATTRIBUTE] == null || tableColumn.Attributes[NAME_ATTRIBUTE].Value.IsNullOrEmpty())
             {
