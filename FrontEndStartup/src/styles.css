@@ -1,2 +1,6 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
+body {
+     background-color: #F5F5F5 !important;
+}

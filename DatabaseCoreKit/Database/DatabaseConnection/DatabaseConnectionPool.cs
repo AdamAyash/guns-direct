@@ -31,7 +31,6 @@
             RetrieveDatabseConfiguration();
             InitializeConnectionPool();
 
-
         }
 
         ~DatabaseConnectionPool()
@@ -45,6 +44,7 @@
 
             _connectionString = _configurationManager.GetConnectionString("GunsDirectDatabase");
             _maxPoolSize = databaseSettings!.MaxPoolConnections;
+
         }
 
         private void InitializeConnectionPool()

@@ -1,13 +1,32 @@
 ﻿namespace Common
 {
+    #region
     using Serilog;
+    #endregion
 
-    public class Logger
+    /// <summary></summary>
+    public sealed class Logger
     {
+        // --------------------------------------------------------------------------
+        // Constants
+        // --------------------------------------------------------------------------
+
+        // --------------------------------------------------------------------------
+        // Members
+        // --------------------------------------------------------------------------
+
         private static Logger? m_LoggerInstance = null;
         private static LogSettings? _logSettings;
 
         private ConfigurationManager _configurationManager;
+
+        // --------------------------------------------------------------------------
+        // Properties
+        // --------------------------------------------------------------------------
+
+        // --------------------------------------------------------------------------
+        // Constructor
+        // --------------------------------------------------------------------------
 
         private Logger()
         {
@@ -15,10 +34,13 @@
             _logSettings = GetConfiguration();
 
             Log.Logger = new LoggerConfiguration()
-            //.WriteTo.Console()
             .WriteTo.Seq(_logSettings.SeqServerUrl)
             .CreateLogger();
         }
+
+        // --------------------------------------------------------------------------
+        // Methods
+        // --------------------------------------------------------------------------
 
         public static Logger GetLoggerInstance()
         {
@@ -27,12 +49,12 @@
 
             return m_LoggerInstance;
         }
-       
+
         private LogSettings? GetConfiguration()
         {
             return _configurationManager?.GetConfiguration<LogSettings>("LoggerSettings");
         }
-       
+
         public void LogInformation(string message)
         {
             Log.Logger.Information(message);
@@ -40,7 +62,7 @@
 
         public void LogError(string message)
         {
-            Log.Logger.Error( message);
+            Log.Logger.Error(message);
         }
 
         public void LogError(string message, params object?[]? propertyValue)
@@ -48,9 +70,9 @@
             Log.Logger.Error(message, propertyValue);
         }
 
-        public void LogError(Exception? exception, string messageTemplate)
+        public void LogError(Exception? exception, string messageTemplate, params object?[]? propertyValue)
         {
-            Log.Logger.Error(exception, messageTemplate);
+            Log.Logger.Error(exception, messageTemplate, propertyValue);
         }
 
         public void LogFatal(string message)
@@ -62,5 +84,9 @@
         {
             Log.Logger.Fatal(exception, messageTemplate);
         }
+
+        // --------------------------------------------------------------------------
+        // Overrides
+        // --------------------------------------------------------------------------
     }
 }

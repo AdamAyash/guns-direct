@@ -5,7 +5,7 @@
     using Microsoft.IdentityModel.Tokens;
     using System.Xml;
 
-    public sealed class DatabaseXMLSchemeParser : DatabaseSchemeParser
+    public sealed class DatabaseXMLSchemeParser : IDatabaseSchemeParser
     {
         private const string TABLE_ELEMENT = "table";
 
@@ -110,7 +110,9 @@
                 validationMessage = Messages.TABLE_SCHEME_HAS_NO_NAME_ATTRIBUTE;
             }
 
-            if(!isTableDataValid)
+            SQLTableBindingData.TableName = tableName;
+
+            if (!isTableDataValid)
                 throw new InvalidDatabaseSchemeException(validationMessage);
 
             var tableColumns = table.ChildNodes;
@@ -125,7 +127,7 @@
 
             _SQLTableBindingsDataMap.Add(tableName, SQLTableBindingData);
 
-            return true;
+            return isTableDataValid;
         }
 
         private bool ParseColumn(TableBindingsData SQLTableBindingData, XmlNode tableColumn)
@@ -140,6 +142,7 @@
                 validationMessage = Messages.TABLE_COLUMN_SCHEME_HAS_NO_NAME_ATTRIBUTES;
             }
 
+            //Да проверяваме дали вечя няма таква колона
             if (tableColumn.Attributes[NAME_ATTRIBUTE] == null || tableColumn.Attributes[NAME_ATTRIBUTE].Value.IsNullOrEmpty())
             {
                 isColumnDataValid = false;
@@ -156,16 +159,13 @@
 
             string dataType = tableColumn.Attributes[DATA_TYPE_ATTRIBUTE]!.Value;
 
-            if (tableColumn.Attributes[IS_PRIMARY_KEY_ATTRIBUTE] == null || tableColumn.Attributes[IS_PRIMARY_KEY_ATTRIBUTE]?.Value == null)
-            {
-                isColumnDataValid = false;
-                validationMessage = Messages.TABLE_COLUMN_SCHEME_HAS_NO_NAME_ATTRIBUTES;
-            }
+            bool isPrimaryKey = false;
+
+            if (tableColumn.Attributes[IS_PRIMARY_KEY_ATTRIBUTE] != null || tableColumn.Attributes[IS_PRIMARY_KEY_ATTRIBUTE]?.Value != null)
+                isPrimaryKey = bool.Parse(tableColumn.Attributes[IS_PRIMARY_KEY_ATTRIBUTE]!.Value);
 
             if (!isColumnDataValid)
                 throw new InvalidDatabaseSchemeException(validationMessage);
-
-            bool isPrimaryKey = bool.Parse(tableColumn.Attributes[IS_PRIMARY_KEY_ATTRIBUTE]!.Value);
 
             XmlAttribute? sizeAttribute = tableColumn.Attributes[SIZE_ATTRIBUTE];
 

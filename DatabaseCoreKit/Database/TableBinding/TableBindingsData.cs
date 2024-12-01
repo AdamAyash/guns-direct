@@ -2,13 +2,16 @@
 {
     using System.Text;
 
-    public class TableBindingsData
+    internal class TableBindingsData
     {
         private List<DatabaseColumnInfo> _tableColumns;
         public TableBindingsData()
         {
             _tableColumns = new List<DatabaseColumnInfo>();
         }
+
+        public string TableName { get; set; }
+
         public List<DatabaseColumnInfo> DatabaseColumns
         {
             get
