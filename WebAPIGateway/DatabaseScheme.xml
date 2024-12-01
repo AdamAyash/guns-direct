@@ -3,6 +3,11 @@
 <tables>
 	<table name="PRODUCTS">
 		<column name="ID" dataType="int" isPrimaryKey="true"></column>
-		<column name="NAME" dataType="varchar" size="32"></column>
+		<column name="NAME" dataType="nvarchar" size="128"></column>
+		<column name="PRODUCT_CATEGORY" dataType="int"></column>
+		<column name="IMAGE_URL" dataType="varchar" size="256"></column>
+		<column name="DESCRIPTION" dataType="varchar" size="512"></column>
+		<column name="PRICE" dataType="flaot"></column>
+		<column name="QUANTITY" dataType="int"></column>
 	</table>
 </tables>

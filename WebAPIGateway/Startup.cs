@@ -1,4 +1,5 @@
 using DatabaseCoreKit;
+using WebAPIGateway.Services.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddCors(options =>
         builder.AllowAnyMethod();
     });
 });
+
+builder.Services.AddScoped<IProductsDataService, ProductsDataService>();
 
 DatabaseXMLSchemeParser parser = new DatabaseXMLSchemeParser();
 parser.Process();

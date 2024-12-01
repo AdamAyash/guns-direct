@@ -110,7 +110,9 @@
                 validationMessage = Messages.TABLE_SCHEME_HAS_NO_NAME_ATTRIBUTE;
             }
 
-            if(!isTableDataValid)
+            SQLTableBindingData.TableName = tableName;
+
+            if (!isTableDataValid)
                 throw new InvalidDatabaseSchemeException(validationMessage);
 
             var tableColumns = table.ChildNodes;

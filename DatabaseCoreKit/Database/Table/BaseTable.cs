@@ -2,6 +2,7 @@
 {
     using Common;
     using Microsoft.Data.SqlClient;
+    using System;
 
     public class BaseTable<RecordType, IdentityKey>
         where RecordType : DomainObject , new()
@@ -53,7 +54,10 @@
                 {
                     RecordType domainObject = new();
                     if (!domainObjectMapper.MapDomainObject(databaseResultSet, domainObject))
+                    {
+                        this._logger.LogError(Messages.DOMAIN_OBJECT_MAPPING_ERROR, _SQLTableBindingsData.TableName);
                         return false;
+                    }
 
                     domainObjectsList.Add(domainObject);
                 }

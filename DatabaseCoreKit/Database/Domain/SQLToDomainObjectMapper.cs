@@ -1,5 +1,6 @@
 ﻿namespace DatabaseCoreKit
 {
+    using Common;
     using Microsoft.Data.SqlClient;
     using System.Reflection;
 
@@ -7,6 +8,7 @@
         where RecordType : DomainObject, new()
     {
         private TableBindingsData _SQLTableBindingsData;
+        private Logger _logger = Logger.GetLoggerInstance();
 
         public SQLToDomainObjectMapper(TableBindingsData SQLTableBindingsData)
         {
@@ -35,6 +37,7 @@
                 }
                 catch (Exception exception)
                 {
+                    this._logger.LogError(exception, Messages.DOMAIN_OBJECT_COLUMN_MAPPING_ERROR, databaseColumn.Name, _SQLTableBindingsData.TableName);
                     return false;
                 }
             }

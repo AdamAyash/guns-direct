@@ -9,6 +9,9 @@
         {
             _tableColumns = new List<DatabaseColumnInfo>();
         }
+
+        public string TableName { get; set; }
+
         public List<DatabaseColumnInfo> DatabaseColumns
         {
             get
