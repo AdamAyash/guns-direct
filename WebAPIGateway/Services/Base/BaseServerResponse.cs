@@ -8,8 +8,6 @@
 
         public BaseServerResponse()
         {
-            Date = DateTime.Now;
-            IsSuccessful = true;
         }
     }
 }

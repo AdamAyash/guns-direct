@@ -150,6 +150,11 @@
             }
 
             string columnName = tableColumn.Attributes[NAME_ATTRIBUTE]!.Value;
+            if(!SQLTableBindingData.DatabaseColumns.Exists(column => column.Name == columnName))
+            {
+                isColumnDataValid = false;
+                validationMessage = Messages.TABLE_COLUMN_SCHEME_ALREADY_EXISTS;
+            }
 
             if (tableColumn.Attributes[DATA_TYPE_ATTRIBUTE] == null || tableColumn.Attributes[DATA_TYPE_ATTRIBUTE]?.Value == null)
             {

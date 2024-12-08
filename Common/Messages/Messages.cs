@@ -14,5 +14,6 @@
         public const string TABLE_COLUMN_SCHEME_HAS_NO_DATA_ATTRIBUTES = "Table column scheme has no data type attribute.";
         public const string DOMAIN_OBJECT_MAPPING_ERROR = "An error occured while trying to map a domain object of table {0}";
         public const string DOMAIN_OBJECT_COLUMN_MAPPING_ERROR = "An error occured while trying to map a domain object column {0} of table {1}";
+        public const string TABLE_COLUMN_SCHEME_ALREADY_EXISTS = "Table column with that name already exists.";
     }
 }

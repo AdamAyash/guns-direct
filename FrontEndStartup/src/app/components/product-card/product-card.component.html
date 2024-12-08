@@ -1,18 +1,17 @@
 <div class="product-card">
     <a class="image" href="#">
-        <img src="https://zarimex.eu/image/cache/catalog/data/Leofoto/GS-1-1-274x274.jpg" />
+        <img [src]="this.interactor.product.imageUrl">
     </a>
     <div class="caption-section">
-        <h5 class="caption">Leofoto</h5>
+        <h5 class="caption">{{this.interactor.product.name}}</h5>
     </div>
     <div class="description">
-        <p>Глава Leofoto SW-02 - за зрителна тръба /Arca/</p>
+         <p>{{this.interactor.product.description}}</p>
     </div>
-    <div class="stats">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="price">205 лв.</p>
+        <div class="container text-center">
+            <div class="row justify-content-evenly">
+                <div class="col price-group">
+                    <span class="price-text">{{this.interactor.product.price | number: '1.2-2'}} </span>
                 </div>
                 <div class="col">
                     <div class="add-to-cart-btn">
@@ -25,4 +24,3 @@
             </div>
         </div>
     </div>
-</div>

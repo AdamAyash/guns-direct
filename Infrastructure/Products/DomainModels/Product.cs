@@ -1,6 +1,7 @@
 ﻿namespace Infrastructure.Products.DomainModels
 {
     using DatabaseCoreKit;
+    using Newtonsoft.Json;
 
     public class Product : DomainObject
     {

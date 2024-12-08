@@ -22,5 +22,5 @@ export abstract class BasePage<PageModel> implements OnInit {
 
     protected abstract loadData(): void;
     protected abstract initControls(): void;
-    protected  abstract createNewPageModel(): PageModel; 
+    protected abstract createNewPageModel(): PageModel; 
 }

@@ -4,7 +4,7 @@ import { BaseComponentInteractor } from '../interactors/base-component-intercato
 @Directive()
 export class BaseComponent<Intercator extends BaseComponentInteractor> implements OnInit {
   
-  @Input() interactor!: BaseComponentInteractor;
+  @Input() interactor!: Intercator;
 
   constructor() {}
 

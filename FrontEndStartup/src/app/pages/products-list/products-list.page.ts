@@ -3,22 +3,28 @@ import { BasePage } from '../../base/ui/pages/base-page';
 import { ProductsDataService } from '../../services/products-data-service/products-data.service';
 import { GetAllProductOutputModel } from '../../services/products-data-service/models/get-all-products-models';
 import { IServiceResultProcessable } from '../../base/server/service-result-processable';
+import { ProductCardComponent } from "../../components/product-card/product-card.component";
+import { ProductCardComponentInteractor } from '../../components/product-card/interactor/product-card.interactor';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [],
+  imports: [ProductCardComponent],
   templateUrl: './products-list.page.html',
   styleUrl: './products-list.page.css'
 })
 export class ProductsListPage extends BasePage<ProductsListPageModel> {
 
    getAllProductsServiceResultProcessable: IServiceResultProcessable<GetAllProductOutputModel> = {
-      processResult: (prcessResult: GetAllProductOutputModel): boolean => {
+      processResult: (resultData: GetAllProductOutputModel): boolean => {
+
+          //resultData.products![0].imageURL = "https://zarimex.eu/image/cache/catalog/data/Armsan%20/612_softtouchN-280x280w.jpg";
+          let image = resultData.products![0];
+          this.pageModel.productCardComponentInteractor.setProductData(resultData.products![0]);
           return true;
       },
       processError: () => {
-        
+
       }
    }
 
@@ -40,6 +46,10 @@ export class ProductsListPage extends BasePage<ProductsListPageModel> {
 }
 
 class ProductsListPageModel{
+    productCardComponentInteractor: ProductCardComponentInteractor;
 
+    constructor() {
+      this.productCardComponentInteractor = new ProductCardComponentInteractor();
+    }
 }
 
