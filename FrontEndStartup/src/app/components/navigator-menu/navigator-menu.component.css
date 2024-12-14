@@ -4,13 +4,19 @@
 }
 
 .navbar-middle{
-    height: 100px;
+    height: 60px;
     background-color: #FAFAFA;
 }
 
 .navbar-top{
     height: 30px;
     background-color: #EAD9D8;
+}
+
+.navbar-brand{
+    margin-top: 18px;
+    margin-left: 15px;
+    float: left;
 }
 
 .free-order {
@@ -24,7 +30,9 @@
 }
 
 .nav-item{
-    font-weight: bolder;
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 1);
 }
 
 .nav-item:hover{
@@ -35,4 +43,8 @@
 
 .nav-link:hover{
     color: #ad5953;
+}
+
+.search-bar-section{
+    margin-top: 6px;
 }

@@ -1,0 +1,13 @@
+<base-page-template [basePageReference]="this">
+<div class=" container-fluid products-container">
+    <div class="row p-0 g-*">
+        @for (product of this._productsList; track $index) {
+            <div class="col-lg-2 col-md-5 col-sm-8">
+                <product-card [interactor]="this.pageModel.productCardComponentInteractor">
+                </product-card>
+            </div>
+        }
+    </div>
+</div>
+</base-page-template>
+<router-outlet></router-outlet>

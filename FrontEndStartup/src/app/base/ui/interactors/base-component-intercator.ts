@@ -2,7 +2,7 @@ import { BaseComponent } from "../components/base-component";
 
 export class BaseComponentInteractor{
     
-    private _control?: BaseComponent<BaseComponentInteractor>;
+    protected _control?: BaseComponent<this>;
     private _isEnabled: boolean = false;
 
     public get isEnabled(): boolean{
@@ -17,7 +17,7 @@ export class BaseComponentInteractor{
 
     }
 
-    public setControl(control: BaseComponent<BaseComponentInteractor>): void{
+    public setControl(control: BaseComponent<this>): void{
         this._control = control;
     }
 }

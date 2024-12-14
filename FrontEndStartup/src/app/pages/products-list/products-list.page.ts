@@ -3,22 +3,33 @@ import { BasePage } from '../../base/ui/pages/base-page';
 import { ProductsDataService } from '../../services/products-data-service/products-data.service';
 import { GetAllProductOutputModel } from '../../services/products-data-service/models/get-all-products-models';
 import { IServiceResultProcessable } from '../../base/server/service-result-processable';
+import { ProductCardComponent } from "../../components/product-card/product-card.component";
+import { ProductCardComponentInteractor } from '../../components/product-card/interactor/product-card.interactor';
+import { Product } from '../../domain/products/products-model';
+import { BasePageTemplateComponent } from "../../base/ui/pages/base-page-template/base-page-template.component";
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-products-list',
+  selector: 'products-list-page',
   standalone: true,
-  imports: [],
+  imports: [ProductCardComponent, BasePageTemplateComponent, RouterModule, RouterOutlet],
   templateUrl: './products-list.page.html',
   styleUrl: './products-list.page.css'
 })
 export class ProductsListPage extends BasePage<ProductsListPageModel> {
 
+  public _productsList?: Product[];
+
    getAllProductsServiceResultProcessable: IServiceResultProcessable<GetAllProductOutputModel> = {
-      processResult: (prcessResult: GetAllProductOutputModel): boolean => {
+      processResult: (resultData: GetAllProductOutputModel): boolean => {
+
+          this._productsList = resultData.products;
+          this.pageModel.productCardComponentInteractor.setProductData(resultData.products![0]);
+
           return true;
       },
       processError: () => {
-        
+          
       }
    }
 
@@ -28,7 +39,7 @@ export class ProductsListPage extends BasePage<ProductsListPageModel> {
 
   protected override loadData(): void {
 
-    this.productsDataService.getAllProducts(this.getAllProductsServiceResultProcessable);
+    this.productsDataService.getAllProducts(this.getAllProductsServiceResultProcessable, this.pageAnimtaionController);
   }
 
   protected override initControls(): void {
@@ -40,6 +51,10 @@ export class ProductsListPage extends BasePage<ProductsListPageModel> {
 }
 
 class ProductsListPageModel{
+    productCardComponentInteractor: ProductCardComponentInteractor;
 
+    constructor() {
+      this.productCardComponentInteractor = new ProductCardComponentInteractor();
+    }
 }
 

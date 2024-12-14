@@ -1,0 +1,22 @@
+.seach-bar-form{
+    width: 100%;    
+    background-color: transparent;
+    box-sizing: border-box;
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(187, 187, 187, 1);
+    border-radius: 8px;
+    height: 47px;
+    transform: translate3d(0, 0, 0) scale(1);
+    z-index: 1;
+    position: relative;
+    top: auto;
+    align-items: center;
+}
+
+.seach-bar-form:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}
