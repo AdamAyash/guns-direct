@@ -1,9 +1,9 @@
 <div class="product-card">
-    <a class="image" href="#">
+    <a class="image" [routerLink]="['/product-details', this.interactor.product.id]">
         <img [src]="this.interactor.product.imageUrl">
     </a>
     <div class="caption-section">
-        <h5 class="caption">{{this.interactor.product.name}}</h5>
+        <h5 class="caption">{{this.interactor.product.name}}</h5>   
     </div>
     <div class="description">
          <p>{{this.interactor.product.description}}</p>
@@ -24,3 +24,4 @@
             </div>
         </div>
     </div>
+    <router-outlet></router-outlet>

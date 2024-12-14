@@ -1,0 +1,9 @@
+@if(this.basePageReference.pageAnimtaionController.isAnimationActive){
+    <loading-spinner-animation>
+    </loading-spinner-animation>
+}
+@else {
+    <navigator-menu [interactor]="this.navigatorMenuComponentNavigator">
+    </navigator-menu>
+    <ng-content></ng-content>
+}

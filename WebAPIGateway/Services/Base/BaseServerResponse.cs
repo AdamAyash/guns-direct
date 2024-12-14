@@ -2,8 +2,9 @@
 {
     public class BaseServerResponse<ResultData>
     {
-        public DateTime Date { get; set; }
+        public DateTime DateTimeStamp { get; set; }
         public bool IsSuccessful { get; set; }
+        public bool IsCacheData { get; set; }
         public ResultData Result { get; set; }
 
         public BaseServerResponse()

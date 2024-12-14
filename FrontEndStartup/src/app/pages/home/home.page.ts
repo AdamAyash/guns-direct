@@ -5,18 +5,19 @@ import { NavigatorMenuIntercator } from '../../components/navigator-menu/interac
 import { ProductCardComponent } from "../../components/product-card/product-card.component";
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { BasePageTemplateComponent } from "../../base/ui/pages/base-page-template/base-page-template.component";
 
 @Component({
   selector: 'home-page',
   standalone: true,
-  imports: [NavigatorMenuComponent, ProductCardComponent, RouterOutlet, RouterModule],
+  imports: [RouterOutlet, RouterModule, BasePageTemplateComponent],
   templateUrl: './home.page.html',
   styleUrl: './home.page.css'
 })
 export class HomePage extends BasePage<HomePageModel> {
 
   protected override loadData(): void {
-
+    
   }
 
   protected override initControls(): void {
@@ -29,8 +30,6 @@ export class HomePage extends BasePage<HomePageModel> {
 }
 
 class HomePageModel{
-
-  navigatorMenuInteractor: NavigatorMenuIntercator = new NavigatorMenuIntercator();
 
   constructor(){
 

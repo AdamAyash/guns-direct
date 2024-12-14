@@ -5,26 +5,31 @@ import { GetAllProductOutputModel } from '../../services/products-data-service/m
 import { IServiceResultProcessable } from '../../base/server/service-result-processable';
 import { ProductCardComponent } from "../../components/product-card/product-card.component";
 import { ProductCardComponentInteractor } from '../../components/product-card/interactor/product-card.interactor';
+import { Product } from '../../domain/products/products-model';
+import { BasePageTemplateComponent } from "../../base/ui/pages/base-page-template/base-page-template.component";
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-products-list',
+  selector: 'products-list-page',
   standalone: true,
-  imports: [ProductCardComponent],
+  imports: [ProductCardComponent, BasePageTemplateComponent, RouterModule, RouterOutlet],
   templateUrl: './products-list.page.html',
   styleUrl: './products-list.page.css'
 })
 export class ProductsListPage extends BasePage<ProductsListPageModel> {
 
+  public _productsList?: Product[];
+
    getAllProductsServiceResultProcessable: IServiceResultProcessable<GetAllProductOutputModel> = {
       processResult: (resultData: GetAllProductOutputModel): boolean => {
 
-          //resultData.products![0].imageURL = "https://zarimex.eu/image/cache/catalog/data/Armsan%20/612_softtouchN-280x280w.jpg";
-          let image = resultData.products![0];
+          this._productsList = resultData.products;
           this.pageModel.productCardComponentInteractor.setProductData(resultData.products![0]);
+
           return true;
       },
       processError: () => {
-
+          
       }
    }
 
@@ -34,7 +39,7 @@ export class ProductsListPage extends BasePage<ProductsListPageModel> {
 
   protected override loadData(): void {
 
-    this.productsDataService.getAllProducts(this.getAllProductsServiceResultProcessable);
+    this.productsDataService.getAllProducts(this.getAllProductsServiceResultProcessable, this.pageAnimtaionController);
   }
 
   protected override initControls(): void {

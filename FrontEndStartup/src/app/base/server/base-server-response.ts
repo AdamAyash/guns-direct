@@ -1,6 +1,7 @@
 
 export class BaseServerResponse<ResultData>{
-    date?: Date;
+    dateTimeStamp?: Date;
     isSuccessful?: boolean;
+    isCacheData? : boolean;
     result?: ResultData;
 }

@@ -8,7 +8,6 @@
     public sealed class DatabaseXMLSchemeParser : IDatabaseSchemeParser
     {
         private const string TABLE_ELEMENT = "table";
-
         private const string DATA_TYPE_ATTRIBUTE = "dataType";
         private const string SIZE_ATTRIBUTE = "size";
         private const string NAME_ATTRIBUTE = "name";
@@ -142,7 +141,6 @@
                 validationMessage = Messages.TABLE_COLUMN_SCHEME_HAS_NO_NAME_ATTRIBUTES;
             }
 
-            //Да проверяваме дали вечя няма таква колона
             if (tableColumn.Attributes[NAME_ATTRIBUTE] == null || tableColumn.Attributes[NAME_ATTRIBUTE].Value.IsNullOrEmpty())
             {
                 isColumnDataValid = false;
@@ -150,7 +148,7 @@
             }
 
             string columnName = tableColumn.Attributes[NAME_ATTRIBUTE]!.Value;
-            if(!SQLTableBindingData.DatabaseColumns.Exists(column => column.Name == columnName))
+            if(SQLTableBindingData.DatabaseColumns.Exists(column => column.Name == columnName))
             {
                 isColumnDataValid = false;
                 validationMessage = Messages.TABLE_COLUMN_SCHEME_ALREADY_EXISTS;
