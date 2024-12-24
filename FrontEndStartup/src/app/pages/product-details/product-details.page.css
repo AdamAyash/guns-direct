@@ -1,5 +1,12 @@
+div[ng-view]{
+  height: 100%;
+}
+
 .content{
-    background-color: white;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  background-color: white;
+  height: 100%;
 }
 .page-title{
   font-weight: 600;
@@ -35,6 +42,8 @@
   border-style: solid;
   border-color: rgba(187, 187, 187, 1);
   border-radius: 20px;
+  flex-direction: column;
+  display: flex;
 }
 
 .price-group{

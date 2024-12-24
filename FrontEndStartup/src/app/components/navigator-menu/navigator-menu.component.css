@@ -48,3 +48,22 @@
 .search-bar-section{
     margin-top: 6px;
 }
+
+.user-actions-group{
+    padding-top: 12px;
+
+    margin-right: 90px;
+    padding-right: 20px;
+}
+
+.profile-button{
+    color: black;
+}
+
+.profile-button svg:hover{
+    fill: #D9401A;
+}
+
+.shopping-cart-button svg:hover{
+    fill: #D9401A;
+}

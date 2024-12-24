@@ -1,9 +1,12 @@
-@if(this.basePageReference.pageAnimtaionController.isAnimationActive){
-    <loading-spinner-animation>
-    </loading-spinner-animation>
-}
-@else {
-    <navigator-menu [interactor]="this.navigatorMenuComponentNavigator">
-    </navigator-menu>
-    <ng-content></ng-content>
-}
+<div [ngStyle]="{'background-color': this.basePageContentBackgroundColor}" class="template-content">
+    @if(this.basePageReference.pageAnimtaionController.isAnimationActive){
+        <loading-spinner-animation>
+        </loading-spinner-animation>
+    }
+    @else {
+        <navigator-menu [interactor]="this.navigatorMenuComponentNavigator">
+        </navigator-menu>
+        <ng-content></ng-content>
+        <footer-component></footer-component>
+    }
+</div>

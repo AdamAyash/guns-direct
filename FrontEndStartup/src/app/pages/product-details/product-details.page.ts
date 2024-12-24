@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { BasePage } from '../../base/ui/pages/base-page';
-import { ActivatedRoute } from '@angular/router';
 import { BasePageTemplateComponent } from "../../base/ui/pages/base-page-template/base-page-template.component";
 
 @Component({
@@ -11,8 +10,6 @@ import { BasePageTemplateComponent } from "../../base/ui/pages/base-page-templat
   styleUrl: './product-details.page.css'
 })
 export class ProductDetailsPage extends BasePage<ProductDetailsPageModel> {
-
-  route: ActivatedRoute = inject(ActivatedRoute);
 
   protected override initControls(): void {
   }

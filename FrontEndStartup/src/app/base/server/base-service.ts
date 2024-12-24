@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { IServiceResultProcessable } from './service-result-processable';
@@ -6,6 +6,7 @@ import { BaseServerResponse } from './base-server-response';
 import { BasePage } from '../ui/pages/base-page';
 import { Guid } from "guid-typescript";
 import { PageAnimationController } from '../ui/pages/page-animation-controller/page-animation-controller';
+import { catchError } from 'rxjs';
 
 @Injectable()
 export abstract class BaseService {
@@ -32,7 +33,7 @@ export abstract class BaseService {
         else{
           serviceProcessable.processError();
         }
-        pageAnimationController.removeAnimation(requestId);
+        pageAnimationController.stopAnimation(requestId);
 
       });
   }

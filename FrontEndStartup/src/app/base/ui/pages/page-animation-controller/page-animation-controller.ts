@@ -10,7 +10,7 @@ export class PageAnimationController{
         this._registeredPageAnimationsArray.push(uuid);
     }
 
-    public removeAnimation(uuid: string){
+    public stopAnimation(uuid: string){
        let animationIndex = this._registeredPageAnimationsArray.indexOf(uuid, 0);
        if(animationIndex >= 0){
             this._registeredPageAnimationsArray.splice(animationIndex, 1);

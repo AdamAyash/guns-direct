@@ -1,6 +1,6 @@
 <base-page-template [basePageReference]="this">
 <div class=" container-fluid products-container">
-    <div class="row p-0 g-*">
+    <div class="row p-0 g-0 m-0">
         @for (product of this._productsList; track $index) {
             <div class="col-lg-2 col-md-5 col-sm-8">
                 <product-card [interactor]="this.pageModel.productCardComponentInteractor">

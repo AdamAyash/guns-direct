@@ -13,8 +13,10 @@ import { SearchBarComponent } from "../search-bar/search-bar.component";
 })
 export class NavigatorMenuComponent extends BaseComponent<NavigatorMenuIntercator>{
 
+
    constructor(){
       super();
    }
+
 
 }
