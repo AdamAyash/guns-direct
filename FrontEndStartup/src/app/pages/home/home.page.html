@@ -2,76 +2,33 @@
   <div class="container-fluid">
     <div class="row my-3">
       <div class="col">
-        <img
-          src="https://zarimex.eu/image/cache/catalog/Baners/2024/birthday_zarimex_24-1243x566.jpg"
-          width="1234"
-        />
+        <img src="https://zarimex.eu/image/cache/catalog/Baners/2024/birthday_zarimex_24-1243x566.jpg" width="1234" />
       </div>
       <div class="col">
         <div class="col">
-          <img
-            src="https://zarimex.eu/image/cache/catalog/Baners/2024/hikmicro-new-thunder-bg-627x277h.png"
-          />
+          <img src="https://zarimex.eu/image/cache/catalog/Baners/2024/hikmicro-new-thunder-bg-627x277h.png" />
         </div>
         <div class="col my-2">
-          <img
-            src="https://zarimex.eu/image/cache/catalog/Baners/2024/black_bunker_bg-627x278.png"
-          />
+          <img src="https://zarimex.eu/image/cache/catalog/Baners/2024/black_bunker_bg-627x278.png" />
         </div>
       </div>
     </div>
   </div>
-  <!-- <div class="row">
-       <div class="col-12">
-            <h4>Разгледайте нашите най-нови продукти</h4>
+
+  <carousel [interactor]="this.pageModel.carouselComponentInteractor" [contentTemplate]="productCardCarouselItem">
+  </carousel>
+
+  <ng-template #productCardCarouselItem>
+    <div class="row mb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <product-card [interactor]="this.pageModel.productCardComponentInteractor">
+            </product-card>
+          </div>
         </div>
-       </div> -->
-  <div class="row mb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div id="productsCarousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                          @for (products of this._productCarouselItemsArray; track $index) {
-                            @if($index == 0){
-                              <div class="carousel-item active"> 
-                                <div class="row p-0 m-0 g-0">
-                              @for(product of products; track $index){
-                                <div class="col">
-                                  <product-card [interactor]="this.pageModel.productCardComponentInteractor">
-                                  </product-card>
-                                </div>
-                              }
-                                </div>
-                              </div>
-                            }@else{
-                              <div class="carousel-item"> 
-                                <div class="row p-0 m-0 g-0">
-                                @for(product of products; track $index){
-                                  <div class="col">
-                                    <product-card [interactor]="this.pageModel.productCardComponentInteractor">
-                                    </product-card>
-                                  </div>
-                                }
-                                </div>
-                              </div>
-                            }
-                          }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-5">
-              <div class="col">
-                <ol class="carousel-indicators">
-                  <button data-target="#myCarousel" data-slide-to="0" class="active"></button>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                  <li data-target="#myCarousel" data-slide-to="3"></li>
-                 </ol>
-              </div>  
-            </div>
-        </div>
-  </div>
+      </div>
+    </div>
+  </ng-template>
   <router-outlet></router-outlet>
 </base-page-template>
