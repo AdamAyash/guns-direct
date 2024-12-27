@@ -3,6 +3,7 @@
 <tables>
 	<table name="PRODUCTS">
 		<column name="ID" dataType="int" isPrimaryKey="true"></column>
+		<column name="UPDATE_COUNTER" dataType="int"></column>
 		<column name="NAME" dataType="nvarchar" size="128"></column>
 		<column name="PRODUCT_CATEGORY" dataType="int"></column>
 		<column name="IMAGE_URL" dataType="varchar" size="256"></column>
@@ -10,4 +11,18 @@
 		<column name="PRICE" dataType="flaot"></column>
 		<column name="QUANTITY" dataType="int"></column>
 	</table>
+
+	<table name="USERS">
+		<column name="ID" dataType="int" isPrimaryKey="true"></column>
+		<column name="UPDATE_COUNTER" dataType="int"></column>
+		<column name="FIRST_NAME" dataType="nvarchar" size="128"></column>
+		<column name="MIDDLE_NAME" dataType="nvarchar" size="128"></column>
+		<column name="LAST_NAME" dataType="nvarchar" size="128"></column>
+		<column name="EMAIL" dataType="nvarchar" size="128"></column>
+		<column name="PHONE" dataType="nvarchar" size="32"></column>
+		<column name="REGISTER_DATE" dataType="datetime"></column>
+		<column name="DATE_OF_BIRTH" dataType="datetime"></column>
+		<column name="PASSWORD" dataType="nvarchar" size="512"></column>
+	</table>
+
 </tables>

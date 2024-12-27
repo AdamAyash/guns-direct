@@ -65,5 +65,7 @@
     <Build Include="dbo\Tables\COUNTERS.sql" />
     <Build Include="dbo\Stored Procedures\SP_ADD_NEW_COUNTER.sql" />
     <Build Include="dbo\Tables\PRODUCTS.sql" />
+    <Build Include="dbo\Tables\PRODUCT_CATEGORIES.sql" />
+    <Build Include="dbo\Tables\USERS.sql" />
   </ItemGroup>
 </Project>

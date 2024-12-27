@@ -1,4 +1,7 @@
 using DatabaseCoreKit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using WebAPIGateway.Services.Authentication;
 using WebAPIGateway.Services.Products;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +18,28 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        RequireExpirationTime = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.
+                GetBytes(builder.Configuration["JwtSettings:SecurityKey"]))
+    };
+});
+
 builder.Services.AddScoped<IProductsDataService, ProductsDataService>();
+builder.Services.AddScoped<IJwtTService, JWTService>();
 
 DatabaseXMLSchemeParser parser = new DatabaseXMLSchemeParser();
 parser.Process();
@@ -30,7 +54,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

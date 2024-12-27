@@ -26,6 +26,7 @@
     border: 1px solid  #BD141A;
     border-radius: 10px;
 }
+
 .btn-primary:hover {
     background-color: #FFFFFF;
     color: #BD141A;
@@ -40,4 +41,15 @@
 }
 .forgot-password a:hover {
     text-decoration: underline;
+}
+
+.form-control:active{
+    border: 2px solid  #BD141A;
+}
+
+.form-control:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    border: 2px solid  #BD141A;
 }

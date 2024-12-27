@@ -77,7 +77,6 @@ div[ng-view]{
     background-color: #0C6D04;
 }
 
-
 .info-block{
   border-bottom: 1px solid #ddd;
   padding: 5px 0;
@@ -98,4 +97,3 @@ div[ng-view]{
   -ms-flex-pack: center;
   justify-content: center;
 }
-
