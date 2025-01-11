@@ -42,6 +42,10 @@ namespace WebAPIGateway.Services.Authentication
                 this._memoryCache.Set<List<User>>(USERS_CACHE_KEY, users);
             }
 
+            User? userDetails = users.Where(user => user.Password == inputModel.Password && user.Email == inputModel.Email).FirstOrDefault();
+
+
+            //TODO PAVEL: Search database for user if not found
 
             UserSaltsTable userSaltsTable = new UserSaltsTable();
             SQLComplexKey oComplexLey = new SQLComplexKey("EMAIL", inputModel.Email);

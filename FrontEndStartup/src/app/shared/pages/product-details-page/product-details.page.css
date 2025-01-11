@@ -7,6 +7,7 @@ div[ng-view]{
   margin-bottom: 0%;
   background-color: white;
   height: 100%;
+  width: 100%;
 }
 .page-title{
   font-weight: 600;
@@ -22,9 +23,45 @@ div[ng-view]{
   text-align: left;
 }
 
-.product-letf{
-    width: 50%;
+
+.product-left img {
+  width: 50%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
 }
+
+.social-share {
+  margin-top: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #0056b3;
+}
+
+.social-icon i {
+  margin-right: 5px;
+}
+
+
+.product-left img:hover {
+  transform: scale(1.05);
+}
+
 
 .product-right{
     width: calc(100% - 50%);
@@ -53,7 +90,7 @@ div[ng-view]{
 }
 
 .product-price{
-    margin-bottom: 5px;
+  margin-bottom: 10px;
   flex-direction: row;
   align-items: flex-end;
 }
@@ -71,6 +108,10 @@ div[ng-view]{
     padding-left: 15px;
     border-radius: 5px !important;
     min-height: 45px;
+}
+
+.product-description{
+  margin-top: 10px;
 }
 
 .add-to-cart-button:hover{
