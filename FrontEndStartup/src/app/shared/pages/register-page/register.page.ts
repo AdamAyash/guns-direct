@@ -57,11 +57,9 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
   }
 
   protected override loadData(): void {
-    // Може да добавите логика за зареждане на данни тук
   }
 
   protected override initControls(): void {
-    // Създаване на FormGroup с валидация за задължителни полета
     this.basePageFormGroup = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
@@ -84,12 +82,10 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
       return false;
     }
 
-    // Допълнителна логика за валидация, ако е необходимо
     return true;
   }
 
   protected override transferControlsToData(): void {
-    // Може да добавите логика за прехвърляне на стойности от формата към модела
   }
 
   protected override onSubmitProcessable(): void {
@@ -103,7 +99,6 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
     registerInputModel.confirmedPassword = this.pageModel.confirmedPasswordInputComponentInteractor.passwordValue;
     registerInputModel.dateOfBirth = this.pageModel.dateOfBirthInputControlInteractor.dateTimeValue;
 
-    // Викаме регистрационната услуга
     this.authenticationService.register(registerInputModel, 
       this.registerServiceResultProcessable, this.pageAnimtaionController);
   }
