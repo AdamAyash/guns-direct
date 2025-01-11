@@ -67,5 +67,7 @@
     <Build Include="dbo\Tables\PRODUCTS.sql" />
     <Build Include="dbo\Tables\PRODUCT_CATEGORIES.sql" />
     <Build Include="dbo\Tables\USERS.sql" />
+    <Build Include="dbo\Tables\USER_SALTS.sql" />
+    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
   </ItemGroup>
 </Project>
