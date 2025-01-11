@@ -4,9 +4,9 @@ namespace Infrastructure.Users.DomainModels
 {
     public class User : DomainObject
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public int UpdateCounter { get; set; }
-        public UserRole Role { get; set; }
+        public int Role { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

@@ -42,9 +42,21 @@ namespace WebAPIGateway.Services.Authentication
                 this._memoryCache.Set<List<User>>(USERS_CACHE_KEY, users);
             }
 
-            User? userDetails = users.Where(user => user.Password == inputModel.Password && user.Email == inputModel.Email).FirstOrDefault();
-            //TODO PAVEL: Search database for user if not found
 
+            UserSaltsTable userSaltsTable = new UserSaltsTable();
+            SQLComplexKey oComplexLey = new SQLComplexKey("EMAIL", inputModel.Email);
+
+            UserSalt userSalt = new UserSalt();
+            if(!userSaltsTable.SelectByComplexKey(oComplexLey , ref userSalt)) 
+            {
+                this._logger.LogError("User does not exist.");
+                return Task.FromResult(false);
+            }
+
+            byte[] salt = Convert.FromBase64String(userSalt.Salt);
+            string hashedPassword = _cryptographicService.HashPassword(inputModel.Password, salt);
+
+            User? userDetails = users.Where(user => user.Password == hashedPassword && user.Email == inputModel.Email).FirstOrDefault();
             if (userDetails?.ID > 0)
             {
                 outpuModel.UserDetails = userDetails;
@@ -96,6 +108,11 @@ namespace WebAPIGateway.Services.Authentication
 
             if (!usersTable.Insert(newUser))
             {
+                if (!databaseConnectionPool.ReleaseConnection(sqlConnection))
+                {
+                    this._logger.LogError("UserAuthenticationService error.");
+                    return Task.FromResult(false);
+                }
                 return Task.FromResult(false);
             }
 
@@ -106,11 +123,14 @@ namespace WebAPIGateway.Services.Authentication
             }
 
             UserSalt userSalt = new UserSalt();
-            userSalt.Salt = salt;
+            userSalt.Salt = Convert.ToBase64String(salt);
             userSalt.UserId = user.ID;
+            userSalt.Email = user.Email;
 
             UserSaltsTable userSaltsTable = new UserSaltsTable(sqlConnection);
-            if(!userSaltsTable.Insert(userSalt))
+            userSaltsTable.SetTransactionContext(usersTable.GetTransactionContext());
+
+            if (!userSaltsTable.Insert(userSalt))
             {
                 this._logger.LogError("UserAuthenticationService error.");
                 return Task.FromResult(false);
@@ -126,6 +146,14 @@ namespace WebAPIGateway.Services.Authentication
             {
                 this._logger.LogError("UserAuthenticationService error.");
                 return Task.FromResult(false);
+            }
+
+            List<User>? users = this._memoryCache.Get<List<User>>(USERS_CACHE_KEY);
+
+            if(users != null)
+            {
+                users.Add(newUser);
+                this._memoryCache.Set(USERS_CACHE_KEY, users);
             }
 
             return Task.FromResult(true);

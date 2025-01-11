@@ -1,4 +1,6 @@
-﻿namespace WebAPIGateway.Services.Base
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace WebAPIGateway.Services.Base
 {
     public class BaseServerResponse<ResultData>
     {

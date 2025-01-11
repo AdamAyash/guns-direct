@@ -1,11 +1,10 @@
-﻿using Infrastructure.Users.DomainModels;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Web.Http.Description;
 using WebAPIGateway.Common;
 using WebAPIGateway.Services.Authentication;
 using WebAPIGateway.Services.Authentication.Models;
 using WebAPIGateway.Services.Base;
-using WebAPIGateway.Services.Products.Models;
 
 namespace WebAPIGateway.Controllers
 {
@@ -15,23 +14,52 @@ namespace WebAPIGateway.Controllers
     {
         private ILogger<ProductsController> _logger;
         private IJwtTService _jwtService;
+        private IUserAuthenticationService _userAuthenticationService;
+        private readonly int _jwtExpireTimeStampInSeconds = 900; // 15 minutes;
 
-        public AuthenticationController(ILogger<ProductsController> logger, IJwtTService jwtService)
+        public AuthenticationController(ILogger<ProductsController> logger,
+            IJwtTService jwtService,
+            IUserAuthenticationService userAuthenticationService,
+            IMemoryCache memoryCache)
         {
             this._logger = logger;
             this._jwtService = jwtService;
+            this._userAuthenticationService = userAuthenticationService;
+
         }
 
         [HttpPost]
         [Route("login")]
-        [ResponseType(typeof(BaseServerResponse<IActionResult>))]
+        [ResponseType(typeof(BaseServerResponse<LoginOutputModel>))]
         public async Task<BaseServerResponse<LoginOutputModel>> LoginAsync([FromBody] LoginInputModel inputModel)
         {
-            var result = new LoginOutputModel() {
-                JwtToken = this._jwtService.GenerateSecurityToken(new User() {Email = "randommail@mail.com" })
-            };
+            bool isSuccessfull = true;
+            var loginOutputModel = new LoginOutputModel();
 
-            return this.GenerateAPIResponse<LoginOutputModel>(true, result);
+            isSuccessfull = await this._userAuthenticationService.GetUserAsync(inputModel, loginOutputModel);
+            if (loginOutputModel.UserDetails != null)
+            {
+                var JwtPayload = this._jwtService.GenerateSecurityToken(loginOutputModel.UserDetails);
+                loginOutputModel.JwtModel = new JwtModel();
+                loginOutputModel.JwtModel.Payload = JwtPayload;
+                loginOutputModel.JwtModel.UserId = loginOutputModel.UserDetails.ID.ToString();
+                loginOutputModel.JwtModel.TokenType = "Bearer";
+                loginOutputModel.JwtModel.ExpiresIn = this._jwtExpireTimeStampInSeconds;
+            }
+
+            return this.GenerateAPIResponse<LoginOutputModel>(isSuccessfull, loginOutputModel);
+        }
+
+        [HttpPost]
+        [Route("register")]
+        [ResponseType(typeof(BaseServerResponse<RegisterOutputModel>))]
+        public async Task<BaseServerResponse<RegisterOutputModel>> RegisterAsync([FromBody] RegisterInputModel inputModel)
+        {
+            bool isSuccessfull = true;
+            var registerOutputModel = new RegisterOutputModel();
+            isSuccessfull = await this._userAuthenticationService.RegisterNewUser(inputModel);
+
+            return this.GenerateAPIResponse<RegisterOutputModel>(isSuccessfull, registerOutputModel);
         }
     }
 }

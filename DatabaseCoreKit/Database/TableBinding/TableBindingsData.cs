@@ -4,6 +4,8 @@
 
     internal class TableBindingsData
     {
+        private const string UPDATE_COUNTER_COLUMN_NAME = "UPDATE_COUNTER";
+
         private List<DatabaseColumnInfo> _tableColumns;
         public TableBindingsData()
         {
@@ -40,9 +42,19 @@
             return columnsInfo.ToString();
         }
 
+        public bool SupportsUpdateCounter()
+        {
+            return _tableColumns.FirstOrDefault(column => column.Name == UPDATE_COUNTER_COLUMN_NAME) != null;
+        }
+
         public DatabaseColumnInfo? GetPrimaryKeyColumn()
         {
             return _tableColumns.FirstOrDefault(column => column.IsPrimaryKey);
+        }
+
+        public string? GetPrimaryKeyColumnName()
+        {
+            return this.GetPrimaryKeyColumn()?.Name;
         }
 
         public int GetColumnCount()

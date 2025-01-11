@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Infrastructure.Users.DomainModels
+﻿namespace Infrastructure.Users.DomainModels
 {
-    public enum UserRole
+    [Flags]
+    public enum UserRole : int
     {
-        Admin
+        Admin = 0,
+        Customer = 1
     }
 }

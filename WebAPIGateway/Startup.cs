@@ -2,6 +2,7 @@ using DatabaseCoreKit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using WebAPIGateway.Services.Authentication;
+using WebAPIGateway.Services.CryptographicService;
 using WebAPIGateway.Services.Products;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMemoryCache();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder => {
@@ -40,6 +43,8 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddScoped<IProductsDataService, ProductsDataService>();
 builder.Services.AddScoped<IJwtTService, JWTService>();
+builder.Services.AddScoped<ICryptographicService, CryptographicService>();
+builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
 DatabaseXMLSchemeParser parser = new DatabaseXMLSchemeParser();
 parser.Process();
@@ -55,5 +60,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseAuthorization();
+app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
