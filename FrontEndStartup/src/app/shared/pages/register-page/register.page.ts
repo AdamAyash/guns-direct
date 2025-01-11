@@ -8,7 +8,6 @@ import { PasswordInputComponentInteractor } from '../../components/password-inpu
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DateTimeInputControlInteractor } from '../../components/date-time-input-control/interactor/date-time-input-control.interactor';
 import { DateTimeInputControlComponent } from '../../components/date-time-input-control/date-time-input-control.component';
-import { resourceUsage } from 'process';
 import { AuthenticationService } from '../../../services/authentication-service/authentication.service';
 import { IServiceResultProcessable } from '../../../core/api/service-result-processable';
 import { RegisterInputModel, RegisterOutputModel } from '../../../services/authentication-service/models/authentication-models';
@@ -19,15 +18,15 @@ import { JwtService } from '../../../services/jwt-service/jwt-service';
   selector: 'register-page',
   standalone: true,
   imports: [
-    BasePageTemplateComponent
-    , PasswordInputControlComponent
-    , TextInputControlComponent
-    , ReactiveFormsModule
-    , FormsModule
-    , DateTimeInputControlComponent
+    BasePageTemplateComponent,
+    PasswordInputControlComponent,
+    TextInputControlComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    DateTimeInputControlComponent
   ],
   templateUrl: './register.page.html',
-  styleUrl: './register.page.css'
+  styleUrls: ['./register.page.css']
 })
 export class RegisterPage extends BasePage<RegisterPageModel> {
 
@@ -36,10 +35,11 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
       processResult: (resultData: RegisterOutputModel): boolean => {
         this.jwtService.set(resultData.jwtModel);
 
-        if (!this.jwtService.isValid())
+        if (!this.jwtService.isValid()) {
           return false;
+        }
 
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/home');
         return true;
       },
       processError: () => {
@@ -57,8 +57,11 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
   }
 
   protected override loadData(): void {
+    // Може да добавите логика за зареждане на данни тук
   }
+
   protected override initControls(): void {
+    // Създаване на FormGroup с валидация за задължителни полета
     this.basePageFormGroup = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
@@ -76,21 +79,20 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
   }
 
   protected override validateData(): boolean {
-
-
     if (!this.basePageFormGroup?.valid) {
-      this.showToastMessage(ToastMessageSeverity.Error, "", "Несъответствие на въведената електронна поща и/или парола");
+      this.showToastMessage(ToastMessageSeverity.Error, "", "Попълнете всички задължителни полета.");
       return false;
     }
 
+    // Допълнителна логика за валидация, ако е необходимо
     return true;
   }
 
   protected override transferControlsToData(): void {
+    // Може да добавите логика за прехвърляне на стойности от формата към модела
   }
 
   protected override onSubmitProcessable(): void {
-
     let registerInputModel = new RegisterInputModel();
     registerInputModel.firstName = this.pageModel.firtsNameInputControlInteractor.textValue;
     registerInputModel.middleName = this.pageModel.middleNameInputControlInteractor.textValue;
@@ -101,9 +103,9 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
     registerInputModel.confirmedPassword = this.pageModel.confirmedPasswordInputComponentInteractor.passwordValue;
     registerInputModel.dateOfBirth = this.pageModel.dateOfBirthInputControlInteractor.dateTimeValue;
 
-    this.authenticationService.register(registerInputModel,
-      this.registerServiceResultProcessable, this.pageAnimtaionController
-    );
+    // Викаме регистрационната услуга
+    this.authenticationService.register(registerInputModel, 
+      this.registerServiceResultProcessable, this.pageAnimtaionController);
   }
 }
 
