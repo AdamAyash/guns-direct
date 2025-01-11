@@ -43,6 +43,8 @@ namespace WebAPIGateway.Services.Authentication
             }
 
             User? userDetails = users.Where(user => user.Password == inputModel.Password && user.Email == inputModel.Email).FirstOrDefault();
+
+
             //TODO PAVEL: Search database for user if not found
 
             if (userDetails?.ID > 0)
