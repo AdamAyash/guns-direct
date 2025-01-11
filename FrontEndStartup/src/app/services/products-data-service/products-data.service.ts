@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../../base/server/base-service';
 import { GetAllProductInputModel, GetAllProductOutputModel } from './models/get-all-products-models';
-import { IServiceResultProcessable } from '../../base/server/service-result-processable';
-import { BasePage } from '../../base/ui/pages/base-page';
-import { PageAnimationController } from '../../base/ui/pages/page-animation-controller/page-animation-controller';
+import { BaseServerRequestService } from '../../core/api/base-server-request-service';
+import { IServiceResultProcessable } from '../../core/api/service-result-processable';
+import { PageAnimationController } from '../../core/ui/pages/page-animation-controller/page-animation-controller';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsDataService extends BaseService {
+export class ProductsDataService extends BaseServerRequestService {
   
    public getAllProducts( serviceProcessable: IServiceResultProcessable<GetAllProductOutputModel>,  pageAnimationController: PageAnimationController){
       let inputModel = new GetAllProductInputModel();

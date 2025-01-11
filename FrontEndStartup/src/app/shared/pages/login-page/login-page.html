@@ -1,0 +1,37 @@
+@if(this.pageAnimtaionController.isAnimationActive){
+<loading-spinner-animation>
+</loading-spinner-animation>
+}
+@else {
+<div class="login-container">
+    <p-toast></p-toast>
+    <p-toast position="top-left" key="tl">
+    </p-toast>
+    <div class="login-header">
+        <h1>Влизане в профила</h1>
+    </div>
+    <form [formGroup]="basePageFormGroup" name="login-form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <text-input-control formControlName="email" [interactor]="this.pageModel.emailInputControlInteractor"
+                [lableTextValue]="'Имейл:'" [placeholderValue]="'Имейл'" [inputType]="textInputControlType.Email">
+            </text-input-control>
+        </div>
+        <div class="mb-3">
+            <password-input-component [interactor]="this.pageModel.passwordInputComponentInteractor"
+                formControlName="password">
+            </password-input-component>
+            <div class="forgot-password mb-3">
+                <a href="#">Забравена парола</a>
+            </div>
+            <button pRipple type="submit" class="btn btn-primary w-100">Влез
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </form>
+</div>
+}

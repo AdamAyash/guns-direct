@@ -1,0 +1,16 @@
+@if(this.position == "column"){
+<label [for]="this.interactor.getUniqueElementId()" class="form-label">{{this.lableTextValue}}</label>
+<input type="date" class="form-control" [(ngModel)]="this._textValue" (change)="transferDataToInteractor()"
+    [id]="this.interactor.getUniqueElementId()" [placeholder]="this.placeholderValue" (input)="onInput($event)">
+}
+@else {
+<div class="row">
+    <div class="col">
+        <label [for]="this.interactor.getUniqueElementId()" class="form-label">{{this.lableTextValue}}</label>
+    </div>
+    <div class="col-9">
+        <input type="date" class="form-control" [(ngModel)]="this._textValue" (change)="transferDataToInteractor()"
+            [id]="this.interactor.getUniqueElementId()" [placeholder]="this.placeholderValue" (input)="onInput($event)">
+    </div>
+</div>
+}

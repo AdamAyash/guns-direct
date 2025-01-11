@@ -1,0 +1,31 @@
+
+.register-container {
+    max-width: 550px;
+    margin: 50px auto;
+     margin-top: 160px;
+    bottom: 50%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+.register-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.register-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #BD141A;
+}
+
+.btn-primary {
+    background-color: #BD141A;
+    border: 1px solid  #BD141A;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #FFFFFF;
+    color: #BD141A;
+}

@@ -1,4 +1,4 @@
-import { Product } from "../../../domain/products/products-model";
+import { Product } from "../../../shared/domain/products/products-model";
 
 export class GetAllProductInputModel{
     

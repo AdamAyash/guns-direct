@@ -1,0 +1,20 @@
+<div [ngStyle]="{'background-color': this.basePageContentBackgroundColor}" class="template-content">
+    @if(this.basePageReference.pageAnimtaionController.isAnimationActive){
+    <loading-spinner-animation>
+    </loading-spinner-animation>
+    }
+    @else {
+    <p-toast></p-toast>
+    <p-toast position="top-left" key="tl">
+    </p-toast>
+    @if(this.includeNavigation){
+    <navigator-menu [interactor]="this.navigatorMenuComponentNavigator">
+    </navigator-menu>
+    }
+    <ng-content></ng-content>
+
+    @if(this.includeNavigation){
+    <footer-component></footer-component>
+    }
+    }
+</div>
