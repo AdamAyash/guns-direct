@@ -1,0 +1,14 @@
+.form-control:active{
+    border: 2px solid  #BD141A;
+}
+
+.form-control:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    border: 2px solid  #BD141A;
+}
+
+.form-control {
+    border-radius: 10px;
+}

@@ -1,0 +1,34 @@
+<base-page-template [basePageReference]="this">
+  <div class="container-fluid">
+    <div class="row my-3">
+      <div class="col">
+        <img src="https://zarimex.eu/image/cache/catalog/Baners/2024/birthday_zarimex_24-1243x566.jpg" width="1234" />
+      </div>
+      <div class="col">
+        <div class="col">
+          <img src="https://zarimex.eu/image/cache/catalog/Baners/2024/hikmicro-new-thunder-bg-627x277h.png" />
+        </div>
+        <div class="col my-2">
+          <img src="https://zarimex.eu/image/cache/catalog/Baners/2024/black_bunker_bg-627x278.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <carousel [interactor]="this.pageModel.carouselComponentInteractor" [contentTemplate]="productCardCarouselItem">
+  </carousel>
+
+  <ng-template #productCardCarouselItem>
+    <div class="row mb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <product-card [interactor]="this.pageModel.productCardComponentInteractor">
+            </product-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <router-outlet></router-outlet>
+</base-page-template>

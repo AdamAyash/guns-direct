@@ -1,10 +1,20 @@
 ﻿namespace DatabaseCoreKit
 {
+    #region
     using Common;
     using Microsoft.Data.SqlClient;
+    #endregion
 
     public sealed class DatabaseConnectionPool : IDatabaseConnectionPool
     {
+        // --------------------------------------------------------------------------
+        // Constants
+        // --------------------------------------------------------------------------
+
+        // --------------------------------------------------------------------------
+        // Members
+        // --------------------------------------------------------------------------
+
         private static DatabaseConnectionPool? _databaseConnectionInstance = null;
 
         private int? _maxPoolSize = 10; //Max connections by default
@@ -21,6 +31,14 @@
         public int AvailableConnectionsCount => _databaseConnectionsPool.Count;
         public int CurrentlyUsedConnections => _databaseCurrentlyUsedConnections.Count;
 
+        // --------------------------------------------------------------------------
+        // Properties
+        // --------------------------------------------------------------------------
+
+        // --------------------------------------------------------------------------
+        // Constructor
+        // --------------------------------------------------------------------------
+
         private DatabaseConnectionPool()
         {
             _databaseConnectionsPool = new List<SqlConnection>();
@@ -33,10 +51,18 @@
 
         }
 
+        // --------------------------------------------------------------------------
+        // Destructor
+        // --------------------------------------------------------------------------
+
         ~DatabaseConnectionPool()
         {
 
         }
+
+        // --------------------------------------------------------------------------
+        // Methods
+        // --------------------------------------------------------------------------
 
         private void RetrieveDatabseConfiguration()
         {
@@ -104,5 +130,11 @@
 
             return _databaseConnectionInstance;
         }
+
+        // --------------------------------------------------------------------------
+        // Overrides
+        // --------------------------------------------------------------------------
+
+
     }
 }

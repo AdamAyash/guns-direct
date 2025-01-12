@@ -22,7 +22,10 @@
                 .ToList();
 
             if (propertiesInfoList.Count != _SQLTableBindingsData.GetColumnCount())
+            {
+                _logger.LogError(Messages.DIFFERENCE_IN_DOMAIN_OBJECT_FIELDS_AND_TABLE);
                 return false;
+            }
 
             var databaseColumns = _SQLTableBindingsData.DatabaseColumns;
 

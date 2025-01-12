@@ -1,0 +1,40 @@
+<div [id]="this.interactor.getUniqueElementId()" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @for (items of this.interactor.carouselItemsDataArray; track $index) {
+        @if($index == 0){
+        <div class="carousel-item active">
+            <div class="row p-0 m-0 g-0">
+                @for(item of items; track $index){
+                <div class="col">
+                    <ng-container *ngTemplateOutlet="this.contentTemplate">
+                    </ng-container>
+                </div>
+                }
+            </div>
+        </div>
+        }@else{
+        <div class="carousel-item">
+            <div class="row p-0 m-0 g-0">
+                @for(item of items; track $index){
+                <div class="col">
+                    <ng-container *ngTemplateOutlet="this.contentTemplate">
+                    </ng-container>
+                </div>
+                }
+            </div>
+        </div>
+        } }
+    </div>
+    <div class="row mt-1">
+        <div class="col">
+            <div class="swiper-pagination">
+                <span class="swiper-pagination-bullet active"
+                    [attr.data-bs-target]="'#' + this.interactor.getUniqueElementId()" data-bs-slide-to="0"
+                    aria-current="true" role="button"></span>
+                <span class="swiper-pagination-bullet"
+                    [attr.data-bs-target]="'#' + this.interactor.getUniqueElementId()" data-bs-slide-to="1"
+                    role="button"></span>
+            </div>
+        </div>
+    </div>
+</div>

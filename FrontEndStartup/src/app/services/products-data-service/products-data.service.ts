@@ -1,21 +1,35 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../../base/server/base-service';
 import { GetAllProductInputModel, GetAllProductOutputModel } from './models/get-all-products-models';
-import { IServiceResultProcessable } from '../../base/server/service-result-processable';
-import { BasePage } from '../../base/ui/pages/base-page';
-import { PageAnimationController } from '../../base/ui/pages/page-animation-controller/page-animation-controller';
+import { BaseServerRequestService } from '../../core/api/base-server-request-service';
+import { IServiceResultProcessable } from '../../core/api/service-result-processable';
+import { PageAnimationController } from '../../core/ui/pages/page-animation-controller/page-animation-controller';
+import { GetProductByIdInputModel, GetProductByIdOutputtModel } from './models/get-product-by-id-models';
 
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
 })
-export class ProductsDataService extends BaseService {
-  
-   public getAllProducts( serviceProcessable: IServiceResultProcessable<GetAllProductOutputModel>,  pageAnimationController: PageAnimationController){
+export class ProductsDataService extends BaseServerRequestService {
+
+   public getAllProducts(serviceProcessable: IServiceResultProcessable<GetAllProductOutputModel>, pageAnimationController: PageAnimationController) {
       let inputModel = new GetAllProductInputModel();
 
       this.sendServerRequest(
          "get_all_products",
-         inputModel, 
+         inputModel,
+         serviceProcessable,
+         pageAnimationController
+      );
+   }
+
+   public getProductById(productId: string,
+      serviceProcessable: IServiceResultProcessable<GetProductByIdOutputtModel>, pageAnimationController: PageAnimationController) {
+
+      let inputModel = new GetProductByIdInputModel();
+      inputModel.productId = productId;
+
+      this.sendServerRequest(
+         "get_product_by_id",
+         inputModel,
          serviceProcessable,
          pageAnimationController
       );
@@ -23,6 +37,6 @@ export class ProductsDataService extends BaseService {
 
    public override getServiceDomain(): string {
       return "products/";
-    }
+   }
 }
 

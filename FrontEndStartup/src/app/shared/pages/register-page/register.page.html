@@ -1,0 +1,72 @@
+<base-page-template [basePageReference]="this" [includeNavigation]="false">
+    <form [formGroup]="basePageFormGroup" name="login-form" (ngSubmit)="onSubmit()">
+        <div class="register-container">
+            <div class="register-header">
+                <h1>Регистрация</h1>
+            </div>
+            <div class="mb-3">
+                <text-input-control formControlName="firstName"
+                    [interactor]="this.pageModel.firtsNameInputControlInteractor" [lableTextValue]="'Име:'"
+                    [placeholderValue]="'Име'" [inputType]="textInputControlType.Text"
+                    [position]="this.textInputPosition.Sameline">
+                </text-input-control>
+            </div>
+            <div class="mb-3">
+                <text-input-control formControlName="middleName"
+                    [interactor]="this.pageModel.middleNameInputControlInteractor" [lableTextValue]="'Презиме:'"
+                    [placeholderValue]="'Презиме'" [inputType]="textInputControlType.Text"
+                    [position]="this.textInputPosition.Sameline">
+                </text-input-control>
+            </div>
+            <div class="mb-3">
+                <text-input-control formControlName="lastName"
+                    [interactor]="this.pageModel.lastNameInputControlInteractor" [lableTextValue]="'Фамилия:'"
+                    [placeholderValue]="'Фамилия'" [inputType]="textInputControlType.Text"
+                    [position]="this.textInputPosition.Sameline">
+                </text-input-control>
+            </div>
+            <div class="mb-3">
+                <text-input-control formControlName="email" [interactor]="this.pageModel.emailInputControlInteractor"
+                    [lableTextValue]="'Имейл:'" [placeholderValue]="'Имейл'" [inputType]="textInputControlType.Email"
+                    [position]="this.textInputPosition.Sameline">
+                </text-input-control>
+            </div>
+            <div class="mb-3">
+                <text-input-control formControlName="phone"
+                    [interactor]="this.pageModel.phoneNumberInputControlInteractor" [lableTextValue]="'Телефон:'"
+                    [placeholderValue]="'Телефон'" [inputType]="textInputControlType.Text"
+                    [position]="this.textInputPosition.Sameline">
+                </text-input-control>
+            </div>
+            <div class="mb-3">
+                <date-time-input-control formControlName="dateOfBirth"
+                    [interactor]="this.pageModel.dateOfBirthInputControlInteractor"
+                    [lableTextValue]="'Дата на раждане:'" [placeholderValue]="'Имейл'"
+                    [position]="this.textInputPosition.Sameline">
+                </date-time-input-control>
+            </div>
+            <div class="mb-3">
+                <password-input-component [interactor]="this.pageModel.passwordInputComponentInteractor"
+                    formControlName="password" [position]="this.textInputPosition.Sameline" [lableTextValue]="'Парола:'"
+                    [placeholderValue]="'Парола'">
+                </password-input-component>
+            </div>
+            <div class="mb-3">
+                <password-input-component [interactor]="this.pageModel.confirmedPasswordInputComponentInteractor"
+                    formControlName="repeatPassword" [position]="this.textInputPosition.Sameline"
+                    [lableTextValue]="'Потвърди паролата:'" [placeholderValue]="'Потвърди паролата'">
+                </password-input-component>
+            </div>
+            <div class="mb-3">
+                <button pRipple type="submit" class="btn btn-primary w-100">Продължете
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </form>
+</base-page-template>
