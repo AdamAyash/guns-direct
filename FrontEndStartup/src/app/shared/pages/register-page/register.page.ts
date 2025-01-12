@@ -33,13 +33,12 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
   registerServiceResultProcessable: IServiceResultProcessable<RegisterOutputModel> =
     {
       processResult: (resultData: RegisterOutputModel): boolean => {
-        this.jwtService.set(resultData.jwtModel);
 
-        if (!this.jwtService.isValid()) {
-          return false;
-        }
+        this.showToastMessage(ToastMessageSeverity.Success, '', 'Успешно се регистрирахте');
+        setTimeout(() => {
+          this.router.navigateByUrl('/home');
+        }, this._redirectToHomePageInterval)
 
-        this.router.navigateByUrl('/home');
         return true;
       },
       processError: () => {
@@ -47,6 +46,8 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
       },
     };
 
+
+  private readonly _redirectToHomePageInterval = 3000;
   private authenticationService: AuthenticationService;
   private jwtService: JwtService;
 
@@ -99,7 +100,7 @@ export class RegisterPage extends BasePage<RegisterPageModel> {
     registerInputModel.confirmedPassword = this.pageModel.confirmedPasswordInputComponentInteractor.passwordValue;
     registerInputModel.dateOfBirth = this.pageModel.dateOfBirthInputControlInteractor.dateTimeValue;
 
-    this.authenticationService.register(registerInputModel, 
+    this.authenticationService.register(registerInputModel,
       this.registerServiceResultProcessable, this.pageAnimtaionController);
   }
 }

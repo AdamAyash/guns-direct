@@ -1,9 +1,9 @@
 import { Product } from "../../../shared/domain/products/products-model";
 
-export class GetAllProductInputModel{
-    
+export class GetAllProductInputModel {
+
 }
 
-export class GetAllProductOutputModel{
+export class GetAllProductOutputModel {
     products?: Product[];
 }

@@ -1,4 +1,5 @@
-﻿using Infrastructure.Products.ProductsTable;
+﻿using Infrastructure.Products.DomainModels;
+using Infrastructure.Products.ProductsTable;
 using WebAPIGateway.Services.Products.Models;
 
 namespace WebAPIGateway.Services.Products
@@ -24,6 +25,18 @@ namespace WebAPIGateway.Services.Products
 
             return await Task.FromResult(products);
         }
-       
+
+        public async Task<GetProductByIdOutputModel> GetProductByIdAsync(GetProductByIdInputModel inputModel)
+        {
+            var product = new GetProductByIdOutputModel();
+
+            int productId = int.Parse(inputModel.ProductId);
+
+            if (!_productsTable.SelectByPrimaryKey(productId, product.ProductData))
+            {
+            }
+
+            return await Task.FromResult(product);
+        }
     }
 }

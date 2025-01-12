@@ -4,7 +4,7 @@
 
     public class Product : DomainObject
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public int UpdateCounter { get; set; }
         public string Name { get; set; }
         public int ProductCategory { get; set; }

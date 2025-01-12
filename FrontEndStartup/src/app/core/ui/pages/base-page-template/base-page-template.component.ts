@@ -8,9 +8,9 @@ import { FooterComponent } from "../../../../shared/components/footer/footer.com
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-export enum BasePageContentBackgroundColor{
+export enum BasePageContentBackgroundColor {
   White = "white",
-  Default = "default"
+  Gray = "#F5F5F5"
 }
 
 @Component({
@@ -22,15 +22,15 @@ export enum BasePageContentBackgroundColor{
     NavigatorMenuComponent,
     FooterComponent,
     ToastModule,
-],
+  ],
   templateUrl: './base-page-template.component.html',
   styleUrl: './base-page-template.component.css'
 })
 export class BasePageTemplateComponent {
 
-  @Input() public includeNavigation: boolean  = true;
+  @Input() public includeNavigation: boolean = true;
   @Input() public basePageReference!: BasePage<any>;
-  @Input() public basePageContentBackgroundColor: BasePageContentBackgroundColor = BasePageContentBackgroundColor.Default;
+  @Input() public basePageContentBackgroundColor: BasePageContentBackgroundColor = BasePageContentBackgroundColor.Gray;
 
   public navigatorMenuComponentNavigator = new NavigatorMenuIntercator();
 

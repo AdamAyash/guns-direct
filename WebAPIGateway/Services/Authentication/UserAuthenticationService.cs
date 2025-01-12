@@ -42,16 +42,17 @@ namespace WebAPIGateway.Services.Authentication
                 this._memoryCache.Set<List<User>>(USERS_CACHE_KEY, users);
             }
 
-            User? userDetails = users.Where(user => user.Password == inputModel.Password && user.Email == inputModel.Email).FirstOrDefault();
-
-
-            //TODO PAVEL: Search database for user if not found
-
             UserSaltsTable userSaltsTable = new UserSaltsTable();
             SQLComplexKey oComplexLey = new SQLComplexKey("EMAIL", inputModel.Email);
 
             UserSalt userSalt = new UserSalt();
             if(!userSaltsTable.SelectByComplexKey(oComplexLey , ref userSalt)) 
+            {
+                this._logger.LogError("User does not exist.");
+                return Task.FromResult(false);
+            }
+
+            if(userSalt.ID <= 0)
             {
                 this._logger.LogError("User does not exist.");
                 return Task.FromResult(false);

@@ -6,5 +6,7 @@ namespace WebAPIGateway.Services.Products
     public interface IProductsDataService
     {
         public Task<GetAllProductsOutputModel> GetAllProductsAsync(GetAllProductsInputModel inputModel);
+
+        public Task<GetProductByIdOutputModel> GetProductByIdAsync(GetProductByIdInputModel inputModel);
     }
 }

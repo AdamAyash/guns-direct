@@ -41,5 +41,26 @@
 
             return this.GenerateAPIResponse<GetAllProductsOutputModel>(isSuccessfull, getAllProductsTask);
         }
+
+        [HttpPost]
+        [Route("get_product_by_id")]
+        [ResponseType(typeof(BaseServerResponse<GetAllProductsOutputModel>))]
+        public async Task<BaseServerResponse<GetProductByIdOutputModel>> GetProductById([FromBody] GetProductByIdInputModel inputModel)
+        {
+            bool isSuccessfull = true;
+            var getProductByIdTask = new GetProductByIdOutputModel();
+
+            try
+            {
+                getProductByIdTask = await _productsDataService.GetProductByIdAsync(inputModel);
+            }
+            catch (Exception exception)
+            {
+                this._logger.LogError(exception.Message);
+                isSuccessfull = false;
+            }
+
+            return this.GenerateAPIResponse<GetProductByIdOutputModel>(isSuccessfull, getProductByIdTask);
+        }
     }
 }

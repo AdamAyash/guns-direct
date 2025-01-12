@@ -81,6 +81,19 @@
             return true;
         }
 
+        public virtual bool SelectByPrimaryKey(IdentityKey identityKey, RecordType domainObject)
+        {
+            string? primaryKeyColumnName = this._SQLTableBindingsData.GetPrimaryKeyColumnName();
+            if (primaryKeyColumnName == null)
+                return false;
+
+            SQLComplexKey complexKey = new SQLComplexKey(primaryKeyColumnName, identityKey);
+            if (!SelectByComplexKey(complexKey, domainObject))
+                return false;
+
+            return true;
+        }
+
         public virtual bool SelectByComplexKey(SQLComplexKey complexKey, ICollection<RecordType> domainObjectsList)
         {
             this.OpenLocalConnection();
@@ -117,6 +130,38 @@
         }
 
         public virtual bool SelectByComplexKey(SQLComplexKey complexKey, ref RecordType domainObject)
+        {
+            OpenLocalConnection();
+
+            if (_databaseConnection == null)
+                return false;
+
+            complexKey.SetTableName(TableName);
+
+            SqlCommand command = new SqlCommand(complexKey.GenerateWhereStatement(), _databaseConnection);
+            command.Transaction = _transactionContext;
+            command.ExecuteNonQuery();
+
+            var domainObjectMapper = new SQLToDomainObjectMapper<RecordType>(_SQLTableBindingsData);
+            using (SqlDataReader databaseResultSet = command.ExecuteReader())
+            {
+                if (databaseResultSet.Read())
+                {
+                    if (!domainObjectMapper.MapDomainObject(databaseResultSet, domainObject))
+                    {
+                        this._logger.LogError(Messages.DOMAIN_OBJECT_MAPPING_ERROR, _SQLTableBindingsData.TableName);
+                        return false;
+                    }
+                }
+
+                if (!CloseLocalConnection())
+                    return false;
+
+                return true;
+            }
+        }
+
+        public virtual bool SelectByComplexKey(SQLComplexKey complexKey, RecordType domainObject)
         {
             OpenLocalConnection();
 
@@ -198,11 +243,15 @@
             }
             catch(Exception exception)
             {
+                Rollback();
                 return false;
             }
 
             if (_isSupportingCounter && !UpdateNextUniqueIdentifier(nextUniqueId))
-                    return false;
+            {
+                Rollback();
+                return false;
+            }
 
             if (!CloseLocalConnection())
                 return false;
@@ -225,7 +274,6 @@
             if (primaryKeyColumn == null)
             {
                 this._logger.LogError("Missing primary key column.");
-                Rollback();
                 return false;
             }
 
@@ -233,7 +281,6 @@
             if (identifier == null)
             {
                 this._logger.LogError("Missing identiifer.");
-                Rollback();
                 return false;
             }
 
@@ -242,16 +289,21 @@
 
             string? updateCommandString = sqlCommandGenerator.GenerateUpdateStatement(domainObject);
             if (updateCommandString == null)
-            {
-                Rollback();
                 return false;
-            }
 
             SqlCommand updateCommand = new SqlCommand(updateCommandString, _databaseConnection);
             updateCommand.Transaction = _transactionContext;
 
-            if (updateCommand.ExecuteNonQuery() <= 0)
+            try
+            {
+                updateCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Rollback();
                 return false;
+            }
 
             if (!CloseLocalConnection())
             {

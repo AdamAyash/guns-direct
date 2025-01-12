@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { TextInputControlType } from "../../../shared/components/text-input/text-input.component";
 import { InputControlPosition } from "../components/base-ui-component-position";
 
-export enum ToastMessageSeverity{
+export enum ToastMessageSeverity {
     Success = "success",
     Warn = "warn",
     Error = "error"
@@ -31,21 +31,22 @@ export abstract class BasePage<PageModel> implements OnInit {
 
     private _pageModel!: PageModel;
     private _pageAnimtaionController: PageAnimationController = new PageAnimationController();
-    
+
     public textInputControlType = TextInputControlType;
     public textInputPosition = InputControlPosition;
-    
+    public templateBackgroundColor = BasePageContentBackgroundColor;
 
 
-    protected get pageModel(): PageModel{
+
+    protected get pageModel(): PageModel {
         return this._pageModel;
     }
 
-    public get pageAnimtaionController(){
-      return this._pageAnimtaionController;
+    public get pageAnimtaionController() {
+        return this._pageAnimtaionController;
     }
 
-    constructor(private injector: Injector,){
+    constructor(private injector: Injector,) {
         this.formBuilder = injector.get(FormBuilder);
         this.messageService = injector.get(MessageService);
         this.primengConfig = injector.get(PrimeNGConfig);
@@ -60,14 +61,14 @@ export abstract class BasePage<PageModel> implements OnInit {
 
     }
 
-    protected showToastMessage(severity: ToastMessageSeverity, title:string, messageContent: string): void {
+    protected showToastMessage(severity: ToastMessageSeverity, title: string, messageContent: string): void {
         setTimeout(() => {
-      this.messageService.add({
-        severity: severity,
-        summary: title,
-        detail: messageContent
-      });
-    }, this._toastMessageDelayInMiliseconds);
+            this.messageService.add({
+                severity: severity,
+                summary: title,
+                detail: messageContent
+            });
+        }, this._toastMessageDelayInMiliseconds);
     }
 
     protected abstract loadData(): void;
@@ -77,12 +78,12 @@ export abstract class BasePage<PageModel> implements OnInit {
     protected abstract transferControlsToData(): void;
     protected abstract onSubmitProcessable(): void;
 
-    public onSubmit(){
-        if(!this.validateData())
+    public onSubmit() {
+        if (!this.validateData())
             return;
 
-       this.onSubmitProcessable();
+        this.onSubmitProcessable();
     }
 
-    
+
 }
